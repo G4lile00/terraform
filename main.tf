@@ -120,25 +120,25 @@ resource "aws_security_group" "main" {
     Name = "Main Security Group"
   }
 }
-resource "aws_instance" "main" {
-  ami           = "ami-0c7217cdde317cfec"
-  instance_type = "t2.micro"
-  key_name      = "default"
-  vpc_security_group_ids = [aws_security_group.main.id]
-  subnet_id = aws_subnet.public_subnets[0].id
+resource "aws_instance" "public_server" {
+  ami           = "ami-0c7217cdde317cfec" # Ubuntu 22.04
+  instance_type = "t2.micro" 
+  key_name      = "default" 
+  vpc_security_group_ids = [aws_security_group.main.id] 
+  subnet_id = aws_subnet.public_subnets[0].id 
   associate_public_ip_address = true
   tags = {
     Name = "Main Instance"
   }
 }
-resource "aws_instance" "main2" {
-  ami           = "ami-0c7217cdde317cfec"
+resource "aws_instance" "private_server" {
+  ami           = "ami-0c7217cdde317cfec" # Ubuntu 22.04
   instance_type = "t2.micro"
   key_name      = "default"
   vpc_security_group_ids = [aws_security_group.main.id]
-  subnet_id = aws_subnet.public_subnets[1].id
-  associate_public_ip_address = true
+  subnet_id = aws_subnet.private_subnets[0].id 
+  associate_public_ip_address = false 
   tags = {
-    Name = "Main Instance 2"
+    Name = "Main Instance"
   }
 }
