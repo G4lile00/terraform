@@ -54,4 +54,14 @@ data "aws_iam_policy_document" "suport" {
     ]
     effect = "Allow"
   }
+  statement {
+    actions = [
+      "rds:Describe*",
+      "rds:List*"
+    ]
+    resources = [
+      "*",
+    ]
+    effect = "Allow"
+  }
 }
